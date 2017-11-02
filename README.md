@@ -7,6 +7,15 @@ Download AuntieTuna: https://github.com/cardi/auntietuna
 ## pre-requisites
 
 TODO (node, express, MySQL?)
+-Install node.js: https://nodejs.org/en/
+-Install express
+'''
+npm install express
+'''
+-Install mysql
+'''
+$ npm install mysql
+'''
 
 TODO (creating MySQL database, tables, users)
 
