@@ -17,7 +17,12 @@ npm install express
 $ npm install mysql
 ```
 
-TODO (creating MySQL database, tables, users)
+Installing mysql will automatically give you a root user and password. You want to Reset the root password by running the commands on mysql: 
+```
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
+ET PASSWORD FOR 'root'@'localhost' = PASSWORD('MyNewPass');
+```
+
 
 ## running the server
 
