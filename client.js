@@ -27,6 +27,9 @@ function signOut() {
     });
   }
 
+/*
+Might need to send POST request to server so that server can add data into database.
+*/
 function importHash(evt){
   var values;
   var f = this.files[0];
