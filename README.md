@@ -1,29 +1,35 @@
 # auntietuna-server
 
-Server-Side Code for AuntieTuna's User Website.
+Server-side code for AuntieTuna's known-good sharing site.
 
-Download AuntieTuna: https://github.com/cardi/auntietuna
+[AuntieTuna](https://github.com/cardi/auntietuna): lightweight,
+personalized content-based phishing detection for the Chrome browser.
 
 ## pre-requisites
+
 This is how I set up the current server for the user site.
 
--Install node.js: https://nodejs.org/en/
+1. Install node.js: https://nodejs.org/en/
+2. Install express
 
--Install express
-```
-npm install express
-```
--Install mysql
-```
-$ npm install mysql
-```
+        $ npm install express
 
-Installing mysql will automatically give you a root user and password. You want to Reset the root password by running the commands on mysql: 
+3. Install mysql
+
+        $ npm install mysql
+
+### installing mysql
+
+Installing mysql will automatically give you a root user and password.
+You want to Reset the root password by running the commands on mysql: 
+
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('MyNewPass');
 ```
+
 From here, you can create a new user and grant them permissions: 
+
 ```
 CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
@@ -32,10 +38,15 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 ## running the server
 
 TODO (e.g., `node server.js`, then connect to `localhost:3000`?)
-On the browser, connect to localhost. In my code, I connect to localhost:3000. To run the server, open the directory where your server code lies and run the following command: 
+
+On the browser, connect to localhost. In my code, I connect to
+localhost:3000. To run the server, open the directory where your server
+code lies and run the following command: 
+
 ```
 node server.js
 ```
+
 Your browswer should update with your html code. 
 
 # tasks to the minimum viable product (mvp)
