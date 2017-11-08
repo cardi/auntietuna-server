@@ -4,6 +4,11 @@ var express = require('express');
 var app = express();
 var path    = require("path");
 var mysql = require('mysql');
+
+/*
+Following router functionality learned from:
+https://www.codementor.io/codeforgeek/build-website-from-scratch-using-expressjs-and-bootstrap-du107sby7
+*/
 var router = express.Router();
 
 //iterates through router.get functions to pass in files
@@ -36,6 +41,8 @@ app.use('/', router);
 /*
 To access mysql database on my laptop terminal, I needed to mention the directory where I downloaded mysql: /usr/local/mysql/bin/mysql
 and then and then go into root. From here I can use commands such as SHOW DATABASES, or use dbname to get into a database.
+
+Adding table info: https://dev.mysql.com/doc/refman/5.5/en/creating-tables.html
 */
 var connection = mysql.createConnection({
 	host: 'localhost',
@@ -65,6 +72,13 @@ connection.connect(function(err){
 connection.query('use test', function(err){
 	if(err) throw err
 	console.log('connected as id ' + connection.threadId);
+});
+
+//currently only displays paypal
+//I manually inputed paypal data into auntietuna mysql
+connection.query('SELECT * FROM auntietuna', function(err, results){
+	if(err) throw err
+	console.log(results);
 });
 
 connection.end();
