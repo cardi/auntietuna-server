@@ -1,24 +1,33 @@
 # auntietuna-server
 
-Server-Side Code for AuntieTuna's User Website.
+Server-side code for AuntieTuna's known-good sharing site.
 
-Download AuntieTuna: https://github.com/cardi/auntietuna
+[AuntieTuna](https://github.com/cardi/auntietuna): lightweight,
+personalized content-based phishing detection for the Chrome browser.
 
 ## pre-requisites
+<<<<<<< HEAD
 To use the auntietuna-server on your computer, you would need to:
+=======
 
--Install node.js: https://nodejs.org/en/
+This is how I set up the current server for the user site.
+>>>>>>> 084fdc7eceb1a94a06f1e487f0fc5b95882d3d8c
 
--Install express
-```
-npm install express
-```
--Install mysql
-```
-$ npm install mysql
-```
+1. Install node.js: https://nodejs.org/en/
+2. Install express
 
-Installing mysql will automatically give you a root user and password. You want to Reset the root password by running the commands on mysql:
+        $ npm install express
+
+3. Install mysql
+
+        $ npm install mysql
+
+### installing mysql
+
+Installing mysql will automatically give you a root user and password.
+You want to Reset the root password by running the commands on mysql:
+
+
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('MyNewPass');
