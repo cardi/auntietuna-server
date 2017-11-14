@@ -43,6 +43,17 @@ node server.js
 ```
 Your browser should update with your html code.
 
+## interacting with the websites
+Now that you have the server running and it displays the user website and its data, you can either download data existing on the site or import your own hashes onto the database.
+
+Let's first disregard the Google Sign-In button at the moment since Username features are not yet implemented.
+
+To download data from the site, you first select the data you want by checking the box the right of the data you want. At the bottom of the table, you would then select the `Download Selected` button. If you had wanted to download all of the data on the table, you could just select the `Download All` button at the bottom of the table. Your downloaded data will be in the format of a JSON file.
+
+Once you have downloaded the data you want, you would import it to your own auntietuna database by clicking the `Choose File` button at the top of your table and select the JSON file containing the data you want to import.
+
+To import your own data onto the user site, you first need to have data you wish to import. This data will need to be in the format of a JSON file and can be attained by downloading data from your personal auntietuna database or the `debug` feature on your auntietuna plug-in (appears on the popup menu). You would then click on `Choose File` on the user site and select the JSON file with data you wish to import.                                                           
+
 # tasks to the minimum viable product (mvp)
 
 _Note_: for now, ignore the "User" column, but that will require adding
