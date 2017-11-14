@@ -6,12 +6,8 @@ Server-side code for AuntieTuna's known-good sharing site.
 personalized content-based phishing detection for the Chrome browser.
 
 ## pre-requisites
-<<<<<<< HEAD
 To use the auntietuna-server on your computer, you would need to:
-=======
 
-This is how I set up the current server for the user site.
->>>>>>> 084fdc7eceb1a94a06f1e487f0fc5b95882d3d8c
 
 1. Install node.js: https://nodejs.org/en/
 2. Install express
