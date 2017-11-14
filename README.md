@@ -5,7 +5,7 @@ Server-Side Code for AuntieTuna's User Website.
 Download AuntieTuna: https://github.com/cardi/auntietuna
 
 ## pre-requisites
-This is how I set up the current server for the user site.
+To use the auntietuna-server on your computer, you would need to:
 
 -Install node.js: https://nodejs.org/en/
 
@@ -18,25 +18,25 @@ npm install express
 $ npm install mysql
 ```
 
-Installing mysql will automatically give you a root user and password. You want to Reset the root password by running the commands on mysql: 
+Installing mysql will automatically give you a root user and password. You want to Reset the root password by running the commands on mysql:
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('MyNewPass');
 ```
-From here, you can create a new user and grant them permissions: 
+From here, you can create a new user and grant them permissions:
 ```
 CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 ```
 
 ## running the server
+On the browser (preferably Chrome), connect to localhost. You can do this by typing `http://localhost:3000/` in the top search bar of the browser. In my code, I have the server connect to localhost:3000.
 
-TODO (e.g., `node server.js`, then connect to `localhost:3000`?)
-On the browser, connect to localhost. In my code, I connect to localhost:3000. To run the server, open the directory where your server code lies and run the following command: 
+Currently, the browser doesn't display anything until you run the server. To run the server, open the directory where your server code lies and run the following command on your command-prompt:
 ```
 node server.js
 ```
-Your browswer should update with your html code. 
+Your browser should update with your html code.
 
 # tasks to the minimum viable product (mvp)
 
