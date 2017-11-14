@@ -43,7 +43,7 @@ node server.js
 ```
 Your browser should update with your html code.
 
-## interacting with the websites
+## interacting with the website
 Now that you have the server running and it displays the user website and its data, you can either download data existing on the site or import your own hashes onto the database.
 
 Let's first disregard the Google Sign-In button at the moment since Username features are not yet implemented.
