@@ -47,8 +47,13 @@ bind = 127.0.0.1
 Post-install steps and running the daemon:
 ```
 sudo -u _mysql /opt/local/lib/mariadb/bin/mysql_install_db
-sudo -u _mysql cd '/opt/local' ; /opt/local/lib/mariadb/bin/mysqld_safe --datadir='/opt/local/var/db/mariadb'
+sudo -u _mysql /opt/local/lib/mariadb/bin/mysqld_safe --datadir='/opt/local/var/db/mariadb'
 /opt/local/lib/mariadb/bin/mysql_secure_installation
+```
+
+To run the daemon thereafter:
+```
+sudo -u _mysql /opt/local/lib/mariadb/bin/mysqld_safe --datadir='/opt/local/var/db/mariadb'
 ```
 
 ### installing mysql databases and tables
@@ -86,6 +91,21 @@ Currently, the browser doesn't display anything until you run the server. To run
 node server.js
 ```
 Your browser should update with your html code.
+
+### development environment
+
+Running MariaDB client:
+```
+/opt/local/lib/mariadb/bin/mysql -u root -p
+```
+
+Watching MariaDB error logs:
+```
+sudo tail -f /opt/local/var/db/mariadb/*.err
+```
+
+Not sure why `Ctrl+C` can't kill the daemon, but for now, `sudo pkill mysqld`
+seems to gracefully shut it down.
 
 ## interacting with the website
 Now that you have the server running and it displays the user website and its data, you can either download data existing on the site or import your own hashes onto the database.
