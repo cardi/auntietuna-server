@@ -23,7 +23,9 @@ cd auntietuna-server
 npm install
 ```
 
-*MariaDB/MySQL Installation*:
+#### MariaDB/MySQL Installation
+
+Getting MariaDB to work with MacPorts is a bit of a struggle.
 
 Install the `errmsg.sys` file:
 
@@ -39,11 +41,12 @@ sudo -u _mysql cd '/opt/local' ; /opt/local/lib/mariadb/bin/mysqld_safe --datadi
 /opt/local/lib/mariadb/bin/mysql_secure_installation
 ```
 
-### installing mysql tables
+### installing mysql databases and tables
+
+#### create new user
 
 Installing mysql will automatically give you a root user and password.
-You want to Reset the root password by running the commands on mysql:
-
+You want to reset the root password by running the commands on mysql:
 
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
@@ -54,6 +57,16 @@ From here, you can create a new user and grant them permissions:
 CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 ```
+
+#### create database
+
+```
+/opt/local/lib/mariadb/bin/mysql -u root -p
+
+> create database test;
+```
+
+Need to create table, assign users, etc.
 
 ## running the server
 On the browser (preferably Chrome), connect to localhost. You can do this by typing `http://localhost:3000/` in the top search bar of the browser. In my code, I have the server connect to localhost:3000.
