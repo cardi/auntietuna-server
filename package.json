@@ -1,0 +1,13 @@
+{
+  "name": "auntietuna-server",
+  "version": "0.0.1",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cardi/auntietuna-server.git"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
+  }
+}

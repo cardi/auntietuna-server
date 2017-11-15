@@ -8,15 +8,25 @@ personalized content-based phishing detection for the Chrome browser.
 ## pre-requisites
 To use the auntietuna-server on your computer, you would need to:
 
-
 1. Install node.js: https://nodejs.org/en/
-2. Install express
+2. Install `npm`
+3. Using `npm`:
+  1. Install express
 
         $ npm install express
 
-3. Install mysql
+  2. Install mysql
 
         $ npm install mysql
+4. Install `mysql`
+
+### macOS and MacPorts
+
+If you're using MacPorts, the following instructions should work:
+
+```
+sudo port install nodejs8 npm5
+```
 
 ### installing mysql
 
