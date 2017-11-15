@@ -34,7 +34,17 @@ sudo mkdir -p /opt/local/lib/mariadb/share/mariadb/
 sudo cp /opt/local/share/mariadb/english/errmsg.sys /opt/local/lib/mariadb/share/mariadb/.
 ```
 
-Post-install steps:
+Modify mysql to run on 127.0.0.1:3306 in `/opt/local/etc/mariadb/my.cnf`:
+```
+# Use default MacPorts settings
+#!include /opt/local/etc/mariadb/macports-default.cnf
+
+[mysqld]
+port = 3306
+bind = 127.0.0.1
+```
+
+Post-install steps and running the daemon:
 ```
 sudo -u _mysql /opt/local/lib/mariadb/bin/mysql_install_db
 sudo -u _mysql cd '/opt/local' ; /opt/local/lib/mariadb/bin/mysqld_safe --datadir='/opt/local/var/db/mariadb'
