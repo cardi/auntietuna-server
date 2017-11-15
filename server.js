@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var path    = require("path");
 var mysql = require('mysql');
+var http = require("http");
 
 /*
 Following router functionality learned from:
@@ -29,8 +30,28 @@ router.get("/", function(req,res){
 
 router.get("/client.js", function(req,res){
 	res.sendFile(path.join(__dirname+'/client.js'));
+	var data = [];
+	console.log(data);
 	console.log("GET client.js...");
+
+	// connection.query('SELECT * FROM auntietuna', function(err, results){
+	// 	if(err) throw err
+	// 	data = results;
+	// 	console.log("getting data...");
+  //
+	// });
+	// console.log(data);
+	// connection.end();
+
 });
+
+var options = {
+	hostname: ''
+
+}
+
+
+
 
 //initiate router functions
 app.use('/', router);
@@ -76,9 +97,10 @@ connection.query('use test', function(err){
 
 //currently only displays paypal
 //I manually inputed paypal data into auntietuna mysql
-connection.query('SELECT * FROM auntietuna', function(err, results){
-	if(err) throw err
-	console.log(results);
-});
-
-connection.end();
+// var data = [];
+// connection.query('SELECT * FROM auntietuna', function(err, results){
+// 	if(err) throw err
+// 	data = results;
+// 	console.log("getting data...");
+//
+// });

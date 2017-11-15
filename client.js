@@ -1,4 +1,6 @@
 var name = "";
+// console.log(data);
+
 
 function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
