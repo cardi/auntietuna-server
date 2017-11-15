@@ -9,26 +9,37 @@ personalized content-based phishing detection for the Chrome browser.
 To use the auntietuna-server on your computer, you would need to:
 
 1. Install node.js: https://nodejs.org/en/
-2. Install `npm`
-3. Using `npm`:
-  1. Install express
-
-        $ npm install express
-
-  2. Install mysql
-
-        $ npm install mysql
-4. Install `mysql`
+2. Install MariaDB (open-source fork of MySQL)
+3. Install `npm`
+4. Run `npm install` to get dependencies
 
 ### macOS and MacPorts
 
 If you're using MacPorts, the following instructions should work:
 
 ```
-sudo port install nodejs8 npm5
+sudo port install nodejs8 npm5 mariadb-server
+cd auntietuna-server
+npm install
 ```
 
-### installing mysql
+*MariaDB/MySQL Installation*:
+
+Install the `errmsg.sys` file:
+
+```
+sudo mkdir -p /opt/local/lib/mariadb/share/mariadb/
+sudo cp /opt/local/share/mariadb/english/errmsg.sys /opt/local/lib/mariadb/share/mariadb/.
+```
+
+Post-install steps:
+```
+sudo -u _mysql /opt/local/lib/mariadb/bin/mysql_install_db
+sudo -u _mysql cd '/opt/local' ; /opt/local/lib/mariadb/bin/mysqld_safe --datadir='/opt/local/var/db/mariadb'
+/opt/local/lib/mariadb/bin/mysql_secure_installation
+```
+
+### installing mysql tables
 
 Installing mysql will automatically give you a root user and password.
 You want to Reset the root password by running the commands on mysql:
