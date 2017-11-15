@@ -84,9 +84,13 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 Need to create table, assign users, etc.
 
 ## running the server
-On the browser (preferably Chrome), connect to localhost. You can do this by typing `http://localhost:3000/` in the top search bar of the browser. In my code, I have the server connect to localhost:3000.
+On the browser (preferably Chrome), connect to localhost. You can do
+this by typing `http://localhost:3000/` in the top search bar of the
+browser. In my code, I have the server connect to localhost:3000.
 
-Currently, the browser doesn't display anything until you run the server. To run the server, open the directory where your server code lies and run the following command on your command-prompt:
+Currently, the browser doesn't display anything until you run the
+server. To run the server, open the directory where your server code
+lies and run the following command on your command-prompt:
 ```
 node server.js
 ```
@@ -108,15 +112,32 @@ Not sure why `Ctrl+C` can't kill the daemon, but for now, `sudo pkill mysqld`
 seems to gracefully shut it down.
 
 ## interacting with the website
-Now that you have the server running and it displays the user website and its data, you can either download data existing on the site or import your own hashes onto the database.
 
-Let's first disregard the Google Sign-In button at the moment since Username features are not yet implemented.
+Now that you have the server running and it displays the user website
+and its data, you can either download data existing on the site or
+import your own hashes onto the database.
 
-To download data from the site, you first select the data you want by checking the box the right of the data you want. At the bottom of the table, you would then select the `Download Selected` button. If you had wanted to download all of the data on the table, you could just select the `Download All` button at the bottom of the table. Your downloaded data will be in the format of a JSON file.
+Let's first disregard the Google Sign-In button at the moment since
+Username features are not yet implemented.
 
-Once you have downloaded the data you want, you would import it to your own auntietuna database by clicking the `Choose File` button at the top of your table and select the JSON file containing the data you want to import.
+To download data from the site, you first select the data you want by
+checking the box the right of the data you want. At the bottom of the
+table, you would then select the `Download Selected` button. If you had
+wanted to download all of the data on the table, you could just select
+the `Download All` button at the bottom of the table. Your downloaded
+data will be in the format of a JSON file.
 
-To import your own data onto the user site, you first need to have data you wish to import. This data will need to be in the format of a JSON file and can be attained by downloading data from your personal auntietuna database or the `debug` feature on your auntietuna plug-in (appears on the popup menu). You would then click on `Choose File` on the user site and select the JSON file with data you wish to import.                                                           
+Once you have downloaded the data you want, you would import it to your
+own auntietuna database by clicking the `Choose File` button at the top
+of your table and select the JSON file containing the data you want to
+import.
+
+To import your own data onto the user site, you first need to have data
+you wish to import. This data will need to be in the format of a JSON
+file and can be attained by downloading data from your personal
+auntietuna database or the `debug` feature on your auntietuna plug-in
+(appears on the popup menu). You would then click on `Choose File` on
+the user site and select the JSON file with data you wish to import.                                                           
 
 # tasks to the minimum viable product (mvp)
 
