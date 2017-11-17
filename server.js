@@ -21,14 +21,13 @@ router.use(function(req,res,next){
 router.get("/checkmark.png", function(req,res){
 	res.sendFile(path.join(__dirname+'/checkmark.png'));
 	console.log("GET checkmark.png...");
-
 });
 
 router.get("/trash.png", function(req,res){
 	res.sendFile(path.join(__dirname+'/trash.png'));
 	console.log("GET trash.png...");
-
 });
+
 
 
 router.get("/users.css", function(req,res){
@@ -42,11 +41,12 @@ router.get("/", function(req,res){
 	console.log("GET users.html...");
 });
 
+
+//Send mysql data to url: localhost:3000/data
 router.get("/data", function(req,res){
 	console.log("get");
 	var i = '<h1> hello world </h1>';
 	console.log("Printing data......");
-	//console.log(JSON.parse(data).ToString());
 
 	res.json(data);
 });

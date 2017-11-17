@@ -16,7 +16,15 @@ $.ajax({
 
 
 
-//display mysql data on table:
+/*
+@param data - each row that can be found in the AuntieTuna mysql database
+
+display mysql data on table and action buttons as well.
+Need to do:
+- add functionality to buttons
+- organize buttons and "actions" collumn
+
+*/
 function loadData(data){
   var table = document.getElementById("myTable");
 
@@ -40,8 +48,12 @@ function loadData(data){
 
 }
 
+/*
+@params googleUser
 
-//Google Sign-in
+Signs in user and accesses basic data from user profile
+*/
+
 var name = "";
 function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
@@ -71,7 +83,7 @@ function signOut() {
   }
 
 /*
-Might need to send POST request to server so that server can add data into database.
+Might need to send POST request to server so that server can add data into database. (DONE)
 */
 function importHash(evt){
   var values;
