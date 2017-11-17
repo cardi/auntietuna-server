@@ -21,6 +21,7 @@ router.use(function(req,res,next){
 router.get("/users.css", function(req,res){
 	res.sendFile(path.join(__dirname+'/users.css'));
 	console.log("GET users.css...");
+
 });
 
 router.get("/", function(req,res){
@@ -28,27 +29,22 @@ router.get("/", function(req,res){
 	console.log("GET users.html...");
 });
 
+router.get("/data", function(req,res){
+	console.log("get");
+	var i = '<h1> hello world </h1>';
+	console.log("Printing data......");
+	//console.log(JSON.parse(data).ToString());
+
+	res.json(data);
+});
+
+
 router.get("/client.js", function(req,res){
 	res.sendFile(path.join(__dirname+'/client.js'));
-	var data = [];
-	console.log(data);
 	console.log("GET client.js...");
-
-	// connection.query('SELECT * FROM auntietuna', function(err, results){
-	// 	if(err) throw err
-	// 	data = results;
-	// 	console.log("getting data...");
-  //
-	// });
-	// console.log(data);
-	// connection.end();
 
 });
 
-var options = {
-	hostname: ''
-
-}
 
 
 
@@ -71,6 +67,12 @@ var connection = mysql.createConnection({
 	password: 'Sage123&!',
 	database: 'test'
 });
+
+// connection.query('SELECT * FROM auntietuna', function(err, results){
+// 	if(err) throw err
+// 	data = results;
+// 	console.log(results);
+// });
 
 function sayHello(request, response){
 	reponse.send("hello!")
@@ -97,10 +99,13 @@ connection.query('use test', function(err){
 
 //currently only displays paypal
 //I manually inputed paypal data into auntietuna mysql
-// var data = [];
-// connection.query('SELECT * FROM auntietuna', function(err, results){
-// 	if(err) throw err
-// 	data = results;
-// 	console.log("getting data...");
-//
-// });
+var data = [];
+var mod;
+connection.query('SELECT * FROM auntietuna', function(err, results){
+	if(err) throw err
+	data = results;
+	console.log(data);
+});
+
+
+connection.end();

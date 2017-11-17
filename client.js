@@ -1,7 +1,18 @@
+console.log("Client is running code...");
+
+//gets the mysql data that server sent to "localhost:3000/data"
+var mysql_data = [];
+$.ajax({
+  url: 'http://localhost:3000/data',
+  complete: function(data) {
+    mysql_data = JSON.parse(data.responseText);
+    console.log(mysql_data);
+  }
+});
+
+
+//Google Sign-in
 var name = "";
-// console.log(data);
-
-
 function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
@@ -21,7 +32,7 @@ function onSignIn(googleUser) {
         console.log("ID Token: " + id_token);
       };
 
-
+//Google Sign-Out
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
@@ -52,71 +63,11 @@ function importHash(evt){
       console.log(result);
       console.log(values.length + " of the values are: " + values);
 
-      var request = window.indexedDB.open("auntie_tuna");
 
-      request.onsuccess = function(event) {
-        console.log("accessing database ...");
-        db = request.result;
-      }
-
-      //var transaction = db.transaction("known_good", "readwrite");
-
-      // transaction.oncomplete = function(event){
-      //   console.log("...transaction completed");
-      // }
-      // transaction.onerror = function(event){
-      //   console.log("...transaction not opened");
-      // }
-      //
-      // var objectStore = transaction.objectStore("known_good");
-      //
-      // for(var i = 0; i< values.length; i++){
-      //   console.log(values[i]);
-      //   console.log(values[i].domain);
-      //   var objectStoreRequest = objectStore.add(values[i]);
-      //   values[i].import = true;
-      //   loadPage(values[i].domain, values[i].hashes, values[i].last_updated, values[i].import);
-      //   objectStoreRequest.onsuccess = function(event){
-      //     console.log("HASHES imported");
-      //   //console.log(values[i].domain + " has been imported to the database");
-      //   //loadPage(values[i].domain, values[i].hashes, values[i].last_updated, values[i].import);
-      //   }
-      //
-      // }
 		}
 	}
 }
 
-
-//database
-const dbName = "auntie_tuna";
-const dbVer  = 1;
-var db = null;
-
-var request = indexedDB.open(dbName, dbVer);
-request.onerror = function(event) {
-  console.log("pb db > error opening db: " + event.target.errorCode)
-};
-request.onsuccess = function(event) {
-  console.log("pb db > onsuccess");
-  db = event.target.result;
-}
-
-//not being entered
-request.onupgradeneeded = function(event) {
-  console.log("pb db > onupgradeneeded");
-  // event is an instance of IDBVersionChangeEvent
-  db = event.target.result;
-  if (db.objectStoreNames.contains('known_good')) {
-    db.deleteObjectStore('known_good');
-  }
-
-  var store = db.createObjectStore('known_good', { keyPath: "domain" });
-  // create indexes
-  var domainIndex = store.createIndex("domain", "domain", {unique: true});
-  var hashesIndex = store.createIndex("hashes", "hashes", {unique: false, multiEntry: true});
-
-}
 
 
 
