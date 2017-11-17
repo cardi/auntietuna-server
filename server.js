@@ -18,6 +18,19 @@ router.use(function(req,res,next){
 	next();
 });
 
+router.get("/checkmark.png", function(req,res){
+	res.sendFile(path.join(__dirname+'/checkmark.png'));
+	console.log("GET checkmark.png...");
+
+});
+
+router.get("/trash.png", function(req,res){
+	res.sendFile(path.join(__dirname+'/trash.png'));
+	console.log("GET trash.png...");
+
+});
+
+
 router.get("/users.css", function(req,res){
 	res.sendFile(path.join(__dirname+'/users.css'));
 	console.log("GET users.css...");

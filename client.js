@@ -7,8 +7,38 @@ $.ajax({
   complete: function(data) {
     mysql_data = JSON.parse(data.responseText);
     console.log(mysql_data);
+    for(var i = 0; i < mysql_data.length; i++){
+      console.log("LOADING DATA.....");
+      loadData(mysql_data[i]);
+    }
   }
 });
+
+
+
+//display mysql data on table:
+function loadData(data){
+  var table = document.getElementById("myTable");
+
+    var row = table.insertRow(1);
+  	var cell1 = row.insertCell(0);
+  	var cell2 = row.insertCell(1);
+  	var cell3 = row.insertCell(2);
+  	var cell4 = row.insertCell(3);
+  	var cell5 = row.insertCell(4);
+  	var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
+    var cell8 = row.insertCell(7);
+
+  	cell1.innerHTML = '<button class= "check" ></button>';
+  	cell2.innerHTML = '<button class= "trash" ></button>';
+
+    cell3.innerHTML = data['user'];
+    cell4.innerHTML = data['date'];
+	  cell5.innerHTML = data['domain'];
+    cell6.innerHTML = '<button class = "getHash">debug</button> <input class="chooseDownload" type="checkbox">';
+
+}
 
 
 //Google Sign-in
@@ -67,9 +97,6 @@ function importHash(evt){
 		}
 	}
 }
-
-
-
 
 
 
