@@ -58,6 +58,12 @@ router.get("/client.js", function(req,res){
 
 });
 
+router.get("/FileSaver.min.js", function(req,res){
+	res.sendFile(path.join(__dirname+'/FileSaver.min.js'));
+	console.log("GET FileSaver.min.js...");
+
+});
+
 
 
 

@@ -27,6 +27,7 @@ Need to do:
 */
 function loadData(data){
   var table = document.getElementById("myTable");
+  //console.log( JSON.parse(data['hash']));
 
     var row = table.insertRow(1);
   	var cell1 = row.insertCell(0);
@@ -46,6 +47,7 @@ function loadData(data){
 	  cell5.innerHTML = data['domain'];
     cell6.innerHTML = '<button class = "getHash">debug</button> <input class="chooseDownload" type="checkbox">';
 
+    loadButtons();
 }
 
 /*
@@ -82,6 +84,97 @@ function signOut() {
     });
   }
 
+  //retrieve hashes from row index to put into JSON file
+  function getJSON(){
+     var button = this.innerHTML;
+     var row = this.parentNode.parentNode;
+     var site = row.cells[4].innerHTML;
+     var data;
+     console.log(site);
+     console.log("accessing: "+ site);
+     console.log(mysql_data);
+
+    //loop through data to get info
+     for(var i = 0; i < mysql_data.length; i++){
+       if(mysql_data[i]['domain'] == site){
+        data = {
+           user: mysql_data[i]['user'],
+           date: mysql_data[i]['date'],
+           domain: mysql_data[i]['domain'],
+           hash: JSON.parse(mysql_data[i]['hash'])
+         }
+
+         // data.push(a);
+          console.log(data);
+       }
+     }
+        if(button == "debug"){
+          console.log("...value retrieved from " + site);
+          var w = window.open();
+            w.document.open();
+            w.document.write(JSON.stringify(data));
+            w.document.close();
+
+        } else { //button == "Download Selected"
+        var hashes;
+        console.log(site + " has been added to download queue...");
+        var storedData = localStorage.getItem("hashes");
+        if(storedData){
+          hashes = JSON.parse(storedData);
+        }
+        hashes.push(data);
+        console.log(hashes);
+        localStorage.setItem("hashes", JSON.stringify(hashes));
+        }
+  }
+
+/*
+download files saved onto local storage
+*/
+function downloadSelected(){
+  var hashes = [];
+  var storedData = localStorage.getItem("hashes" || "[]");
+  if(storedData){
+    //console.log(storedData);
+    hashes = storedData
+    console.log(hashes);
+  }
+  // hashes = JSON.stringify(hashes);
+  // console.log("SAVING: " + hashes);
+  var blob = new Blob([hashes], {type: "application/json;charset=utf-8"});
+  var url = window.URL.createObjectURL(blob);
+  var name = "hashes" + ".json";
+
+  saveAs(blob,name);
+}
+
+/*
+Download all of the Hashes
+*/
+function downloadAll(){
+  var myJSON = [];
+
+  for(var i = 0; i < mysql_data.length; i++){
+    var a = {
+      user: mysql_data[i]['user'],
+      date: mysql_data[i]['date'],
+      domain: mysql_data[i]['domain'],
+      hash: JSON.parse(mysql_data[i]['hash'])
+    }
+    myJSON.push(a);
+  }
+  console.log(myJSON);
+  console.log(JSON.stringify(myJSON));
+  myJSON = JSON.stringify(myJSON);
+  var blob = new Blob([myJSON], {type: "application/json;charset=utf-8"});
+  var url = window.URL.createObjectURL(blob);
+  var name = "hashes.allHashes" + ".json";
+
+  saveAs(blob,name);
+  console.log("...download completed");
+}
+
+
 /*
 Might need to send POST request to server so that server can add data into database. (DONE)
 */
@@ -110,7 +203,25 @@ function importHash(evt){
 	}
 }
 
+function loadButtons(){
 
+  var hashButtons = document.getElementsByClassName("getHash");
+  var trashButtons = document.getElementsByClassName("trash");
+  var enableButtons = document.getElementsByClassName("check");
+  var checkBoxes = document.getElementsByClassName("chooseDownload");
+  //console.log("hash buttons #: " + hashButtons.length);
+  for(var i = 0; i < hashButtons.length; i++){
+      hashButtons[i].addEventListener('click', getJSON);
+      // trashButtons[i].addEventListener('click', removeRow);
+      // enableButtons[i].addEventListener('click', enableSite);
+      checkBoxes[i].addEventListener('click', getJSON);
+  }
+
+}
+//keep array of data to be exported
+localStorage.hashes = "[]";
 
 document.getElementById('signout').addEventListener('click', signOut);
 document.getElementById('import').addEventListener('click', importHash);
+document.getElementById('all').addEventListener('click', downloadAll);
+document.getElementById('selected').addEventListener('click', downloadSelected);
