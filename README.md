@@ -84,7 +84,7 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 Need to create table, assign users, etc. Table should be in the form:
 
 ```
-| user        | last_updated       | domain     | hashes                                                                                                                 
+| user      | last_updated      | domain      | hashes                                                                                                                 
 ```
 
 ## running the server
