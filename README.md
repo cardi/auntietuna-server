@@ -85,7 +85,7 @@ Need to create table, assign users, etc. Table should be in the form:
 
 ```
 | user      | last_updated      | domain      | hashes
-| default      | 2017-10-26T23:19:26.170Z      | www.paypal.com      | ["009aba82045e1a1770c30b74d4b9746b984131a07fffa014426bca78504816c4","00cc856707b91791dd03b4167953db5942.....]                                                                                                        
+| default   | 2017-10-26T23:19:26.170Z  | www.paypal.com  | ["009aba82045e1a1770c30b74d4b9746b984131a07fffa014426bca78504816c4","00cc856707b91791dd03b4167953db5942.....]                                                                                                        
 ```
 
 ## running the server
