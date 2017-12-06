@@ -100,12 +100,12 @@ app.post('/', bodyParser.urlencoded({ extended: false }), function(req, res){
 			};
 			//USE:  INSERT INTO table ...
 			//https://www.w3schools.com/nodejs/nodejs_mysql_insert.asp
-				// connection.query('INSERT INTO auntietuna SET ?', post,  function(err, results){
-				// 	console.log("trying to update database");
-				// 	if(err) throw err
-				// 	// data = results;
-				// 	console.log(results);
-				// });
+				connection.query('INSERT INTO auntietuna SET ?', post,  function(err, results){
+					console.log("trying to update database");
+					if(err) throw err
+					// data = results;
+					console.log(results);
+				});
 				//
 
 		}else if(req.body['action'] == 'delete'){ //delete from database
