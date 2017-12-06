@@ -4,6 +4,7 @@ console.log("Client is running code...");
 var mysql_data = [];
 $.ajax({
   url: 'http://localhost:3000/data',
+  type: "GET",
   complete: function(data) {
     mysql_data = JSON.parse(data.responseText);
     console.log(mysql_data);
@@ -43,7 +44,7 @@ function loadData(data){
   	cell2.innerHTML = '<button class= "trash" ></button>';
 
     cell3.innerHTML = data['user'];
-    cell4.innerHTML = data['date'];
+    cell4.innerHTML = data['last_updated'];
 	  cell5.innerHTML = data['domain'];
     cell6.innerHTML = '<button class = "getHash">debug</button> <input class="chooseDownload" type="checkbox">';
 
@@ -56,7 +57,7 @@ function loadData(data){
 Signs in user and accesses basic data from user profile
 */
 
-var name = "";
+var name = "anonymous";
 function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
@@ -99,9 +100,9 @@ function signOut() {
        if(mysql_data[i]['domain'] == site){
         data = {
            user: mysql_data[i]['user'],
-           date: mysql_data[i]['date'],
+           last_updated: mysql_data[i]['last_updated'],
            domain: mysql_data[i]['domain'],
-           hash: JSON.parse(mysql_data[i]['hash'])
+           hashes: JSON.parse(mysql_data[i]['hashes'])
          }
 
          // data.push(a);
@@ -157,9 +158,9 @@ function downloadAll(){
   for(var i = 0; i < mysql_data.length; i++){
     var a = {
       user: mysql_data[i]['user'],
-      date: mysql_data[i]['date'],
+      last_updated: mysql_data[i]['last_updated'],
       domain: mysql_data[i]['domain'],
-      hash: JSON.parse(mysql_data[i]['hash'])
+      hashes: JSON.parse(mysql_data[i]['hashes'])
     }
     myJSON.push(a);
   }
@@ -189,18 +190,55 @@ function importHash(evt){
     console.log("reading file...");
     var reader = new FileReader();
     reader.readAsText(f);
+    var data = [];
 
     reader.onload = function(e){
-      console.log("result is: " + e.target.result);
-      var result = JSON.parse(e.target.result);
-      values = result;
+      // console.log(e.target.result);
+      // console.log(JSON.parse(e.target.result));
+      // var result = JSON.parse(e.target.result);
+
+      values = JSON.parse(e.target.result);
       // values.import = true;
-      console.log(result);
+      console.log(values);
       console.log(values.length + " of the values are: " + values);
 
+      //go through imported data
+      for(var i = 0; i < values.length; i++){
+        console.log(values[i]);
+        //send data to server to add to mysql data base
+        $.ajax({
+          url: '',
+          type: "POST",
+          data: {data: values[i], user: name, action: 'add'},
+          complete: function(msg) {
+            console.log("Data sent....");
+          }
+        });
+
+      }
 
 		}
 	}
+}
+
+
+function removeRow(){
+  var row = this.parentNode.parentNode;
+  var site = row.cells[4].innerHTML;
+  var user_name = row.cells[2].innerHTML;
+  console.log("removing site: "+ site);
+
+  $.ajax({
+    url: '',
+    type: "POST",
+    data: {domain: site, action: 'delete', user: user_name },
+    complete: function(msg) {
+      console.log("Data sent....");
+    }
+  });
+
+  document.getElementById("myTable").deleteRow(row.rowIndex);
+
 }
 
 function loadButtons(){
@@ -212,7 +250,7 @@ function loadButtons(){
   //console.log("hash buttons #: " + hashButtons.length);
   for(var i = 0; i < hashButtons.length; i++){
       hashButtons[i].addEventListener('click', getJSON);
-      // trashButtons[i].addEventListener('click', removeRow);
+      trashButtons[i].addEventListener('click', removeRow);
       // enableButtons[i].addEventListener('click', enableSite);
       checkBoxes[i].addEventListener('click', getJSON);
   }
@@ -222,6 +260,6 @@ function loadButtons(){
 localStorage.hashes = "[]";
 
 document.getElementById('signout').addEventListener('click', signOut);
-document.getElementById('import').addEventListener('click', importHash);
+document.getElementById('import').addEventListener('change', importHash);
 document.getElementById('all').addEventListener('click', downloadAll);
 document.getElementById('selected').addEventListener('click', downloadSelected);

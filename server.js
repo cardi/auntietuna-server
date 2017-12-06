@@ -5,6 +5,7 @@ var app = express();
 var path    = require("path");
 var mysql = require('mysql');
 var http = require("http");
+var bodyParser = require('body-parser')
 
 /*
 Following router functionality learned from:
@@ -65,11 +66,63 @@ router.get("/FileSaver.min.js", function(req,res){
 });
 
 
-
-
-
 //initiate router functions
 app.use('/', router);
+
+//to be able to parse ajax req from client
+// app.use(express.bodyParser());
+
+
+/*
+Need to install body-parser to be able to get ajax request from client
+https://github.com/expressjs/body-parser
+
+sudo npm install body-parser
+
+*/
+app.post('/', bodyParser.urlencoded({ extended: false }), function(req, res){
+	// console.log(req.body);
+	// console.log(req.body['user']);
+	// console.log(req.body['data[last_updated]']);
+	// console.log(req.body['data[domain]']);
+	// console.log(JSON.stringify(req.body['data[hashes][]']));
+	// var hash = JSON.stringify(req.body['data[hashes][]']);
+
+		console.log(req.body['action']);
+
+//if we wish to add into the database
+		if(req.body['action'] == 'add'){
+			var post = {
+				user: req.body['user'],
+				last_updated: req.body['data[last_updated]'],
+				domain: req.body['data[domain]'],
+				hashes: JSON.stringify(req.body['data[hashes][]'])
+			};
+			//USE:  INSERT INTO table ...
+			//https://www.w3schools.com/nodejs/nodejs_mysql_insert.asp
+				// connection.query('INSERT INTO auntietuna SET ?', post,  function(err, results){
+				// 	console.log("trying to update database");
+				// 	if(err) throw err
+				// 	// data = results;
+				// 	console.log(results);
+				// });
+				//
+
+		}else if(req.body['action'] == 'delete'){ //delete from database
+
+			//makes a query connection that finds row with the domain and user that we want to delete and removes it from the database
+			connection.query('DELETE FROM auntietuna WHERE domain = ? AND user = ?',[req.body['domain'], req.body['user']],  function(err, results){
+				console.log("trying to delete from database");
+				if(err) throw err
+				console.log("Successfully deleted.");
+				console.log(results);
+			});
+		}
+
+
+
+
+});
 
 // to access: /usr/local/mysql/bin/mysql -u root -p
 // connection to test database in root directory
@@ -123,8 +176,8 @@ var mod;
 connection.query('SELECT * FROM auntietuna', function(err, results){
 	if(err) throw err
 	data = results;
-	console.log(data);
+	//console.log(data);
 });
 
 
-connection.end();
+//connection.end();
