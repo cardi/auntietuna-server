@@ -81,7 +81,11 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 > create database test;
 ```
 
-Need to create table, assign users, etc.
+Need to create table, assign users, etc. Table should be in the form:
+
+```
+| user        | last_updated       | domain     | hashes                                                                                                                 
+```
 
 ## running the server
 On the browser (preferably Chrome), connect to localhost. You can do
