@@ -84,8 +84,28 @@ GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
 Need to create table, assign users, etc. Table should be in the form:
 
 ```
-| user      | last_updated      | domain      | hashes
-| default   | 2017-10-26T23:19:26.170Z  | www.paypal.com  | ["009aba82045e1a1770c30b74d4b9746b984131a07fffa014426bca78504816c4","00cc856707b91791dd03b4167953db5942.....]                                                                                                        
++--------------+----------------+------+-----+---------+-------+
+| Field        | Type           | Null | Key | Default | Extra |
++--------------+----------------+------+-----+---------+-------+
+| user         | varchar(50)    | YES  |     | NULL    |       |
+| last_updated | varchar(40)    | YES  |     | NULL    |       |
+| domain       | varchar(50)    | YES  |     | NULL    |       |
+| hashes       | varchar(65000) | YES  |     | NULL    |       |
++--------------+----------------+------+-----+---------+-------+                                       
+```
+
+To create the database, you can use the commands:
+
+```
+CREATE TABLE auntietuna (user VARCHAR(50), last_updated VARCHAR(40), domain VARCHAR(50), hashes VARCHAR(65000));
+
+```
+
+Inserting things into the table have the general format of:
+
+```
+INSERT INTO auntietuna ( user, last_updated, domain, hashes ) VALUES ( val1, val2, val3, val4 );
+
 ```
 
 ## running the server
